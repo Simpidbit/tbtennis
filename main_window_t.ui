@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>main_window_t</class>
+ <widget class="QWidget" name="main_window_t">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>240</width>
+    <height>280</height>
+   </rect>
+  </property>
+  <property name="font">
+   <font>
+    <pointsize>8</pointsize>
+   </font>
+  </property>
+  <property name="windowTitle">
+   <string>main_window_t</string>
+  </property>
+  <widget class="QWidget" name="verticalLayoutWidget">
+   <property name="geometry">
+    <rect>
+     <x>40</x>
+     <y>30</y>
+     <width>160</width>
+     <height>201</height>
+    </rect>
+   </property>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QPushButton" name="begin_btn">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文彩云</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>开始游戏</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="record_btn">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文彩云</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>历史分数</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="tutor_btn">
+      <property name="minimumSize">
+       <size>
+        <width>0</width>
+        <height>40</height>
+       </size>
+      </property>
+      <property name="font">
+       <font>
+        <family>华文彩云</family>
+        <pointsize>16</pointsize>
+       </font>
+      </property>
+      <property name="text">
+       <string>游戏说明</string>
+      </property>
+     </widget>
+    </item>
+   </layout>
+  </widget>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
