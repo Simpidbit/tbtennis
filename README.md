@@ -6,16 +6,6 @@
 
 
 
-## 总体概述
-
-
-
-
-
-
-
-
-
 ## 项目架构
 
 其中每个大框都代表一个线程
@@ -75,19 +65,34 @@ data_parser -..-> logic_module;
 
 
 
-## 业务逻辑
+## 程序逻辑
 
 ### 客户端
 
 ```mermaid
-graph TD;
-step1["程序开始运行，弹出菜单界面"]-->step2_game["开始游戏按钮"];
-step1-->step2_settings["游戏设置按钮"];
-step1-->step2_log["登录/注册按钮"];
+flowchart TD;
+
+step1["程序开始运行，弹出菜单界面"];
+
+    step2_game["开始游戏按钮"];
+    step2_settings["游戏设置按钮"];
+    step2_log["登录/注册按钮"];
+
+        step3_islogin["判断是否已经登录"];
+        	step4_register["注册"];
+    	step3_game["选择房间"];
+    		step4_game["新开窗口，游戏开始"];
 
 
+step1-->step2_game-->step3_islogin;
+step1-->step2_settings;
+step1-->step2_log-->step3_islogin;
 
 
+step3_islogin--"已登录"-->返回;
+step3_islogin--"未登录"-->step4_register-->返回;
+
+step2_game-->step3_game-->step4_game;
 ```
 
 
