@@ -24,6 +24,55 @@
 
 
 
+```mermaid
+flowchart TD;
+
+draw_data["绘制对象数据"];
+physics_data["物理对象数据"];
+
+
+subgraph "游戏逻辑处理线程";
+logic_module["游戏逻辑模块"];
+end;
+
+
+subgraph "循环计算线程";
+physics_module["物理引擎"];
+end;
+
+subgraph "图形渲染线程";
+graph_render["图形渲染模块"];
+end;
+
+subgraph "客户端通信线程";
+data_parser["数据解析器"]-->client_network["客户端网络通信模块"];
+end;
+
+
+subgraph "服务端通信程序";
+server_network["服务端网络通信模块"];
+end;
+
+
+logic_module --> draw_data --> graph_render;
+logic_module --"数据更改请求"--> physics_module --"更新"--> physics_data;
+physics_data --"访问"--> physics_module;
+physics_data --> logic_module;
+
+logic_module --> data_parser;
+
+client_network --> server_network;
+
+server_network -."广播".-> client_network;
+client_network -..-> data_parser;
+data_parser -..-> logic_module;
+
+```
+
+
+
+
+
 
 
 ## 业务逻辑
