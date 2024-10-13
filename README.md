@@ -83,16 +83,18 @@ step1["程序开始运行，弹出菜单界面"];
     	step3_game["选择房间"];
     		step4_game["新开窗口，游戏开始"];
 
+step2_game-->step3_game-->step4_game;
 
 step1-->step2_game-->step3_islogin;
 step1-->step2_settings;
 step1-->step2_log-->step3_islogin;
 
 
+
 step3_islogin--"已登录"-->返回;
 step3_islogin--"未登录"-->step4_register-->返回;
 
-step2_game-->step3_game-->step4_game;
+
 ```
 
 
