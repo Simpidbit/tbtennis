@@ -25,6 +25,13 @@ object_t<shape_data_t>::~object_t()
 }
 
 
+ball_t::ball_t(double         mass,         SHAPE_T   shpae,
+               shape_data_t   shape_data,   vector_t  pos) 
+    : object_t<double>::object_t(   mass,           shape,
+                                    shape_data,     pos     )
+{
+}
+
 ///////////////////////////////////////////////
 // object_t end, physics_machine_t begin
 ///////////////////////////////////////////////
