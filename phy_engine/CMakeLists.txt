@@ -6,7 +6,7 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 set(PHY_SOURCES
-    math.cpp
+    phymath.cpp
     physics.cpp
 )
 

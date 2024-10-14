@@ -3,7 +3,7 @@
 
 #define TEST
 
-#include <cstdint>
+#include <stdint.h>
 
 #define SHAPE_T     uint8_t
 #define CIRCLE      (0)
