@@ -142,19 +142,15 @@ end;
 
 ### ball_t
 
->所属模块：phy_engine
->
->头文件：`phy_engine/include/physics.h`
->
->成员函数定义：`phy_engine/physics.cpp`
->
->类型：最终派生类
->
->派生类：无
->
->继承自：`object_t`
->
->个性依赖：无
+| 属性         | 值                             |
+| ------------ | ------------------------------ |
+| 所属模块     | phy_engine                     |
+| 头文件       | `phy_engine/include/physics.h` |
+| 成员函数定义 | `phy_engine/physics.cpp`       |
+| 类型         | 最终派生类                     |
+| 派生类       | 无                             |
+| 继承自       | `object_t`                     |
+| 个性依赖     | 无                             |
 
 表示台球.
 
@@ -164,11 +160,11 @@ end;
 
 ### byte_t 结构体
 
->所属模块：phy_engine
->
->头文件：`phy_engine/include/macro.h`
->
->个性依赖：无
+| 属性     | 值                           |
+| -------- | ---------------------------- |
+| 所属模块 | phy_engine                   |
+| 头文件   | `phy_engine/include/macro.h` |
+| 个性依赖 | 无                           |
 
 提供对内存精确到位的访问.
 
@@ -178,19 +174,15 @@ end;
 
 ### line_t
 
-> 所属模块：phy_engine
->
-> 头文件：`phy_engine/include/math.h`
->
-> 成员函数定义：`phy_engine/math.cpp`
->
-> 类型：普通类
->
-> 派生类：无
->
-> 继承自：无
->
-> 个性依赖：无
+| 属性         | 值                             |
+| ------------ | ------------------------------ |
+| 所属模块     | phy_engine                     |
+| 头文件       | `phy_engine/include/math.h` |
+| 成员函数定义 | `phy_engine/math.cpp`       |
+| 类型         | 普通类                     |
+| 派生类       | 无                             |
+| 继承自       | 无                     |
+| 个性依赖     | 无                             |
 
 表示直线、射线或线段.
 
@@ -200,19 +192,15 @@ end;
 
 ### line_wall_t
 
->所属模块：phy_engine
->
->头文件：`phy_engine/include/physics.h`
->
->成员函数定义：`phy_engine/physics.cpp`
->
->类型：最终派生类
->
->派生类：无
->
->继承自：object_t
->
->个性依赖：`line_t`
+| 属性         | 值                             |
+| ------------ | ------------------------------ |
+| 所属模块     | phy_engine                     |
+| 头文件       | `phy_engine/include/physics.h` |
+| 成员函数定义 | `phy_engine/physics.cpp` |
+| 类型         | 最终派生类                |
+| 派生类       | 无                             |
+| 继承自       | `object_t`          |
+| 个性依赖     | `line_t`                     |
 
 表示线型墙.
 
@@ -222,19 +210,15 @@ end;
 
 ### object_t
 
-> 所属模块：phy_engine
->
-> 头文件：`phy_engine/include/physics.h`
->
-> 成员函数定义：`phy_engine/physics.cpp`
->
-> 类型：基类，模板类
->
-> 派生类：`ball_t`, `line_wall_t`
->
-> 继承自：无
->
-> 个性依赖：`SHAPE_T`, `vector_t`
+| 属性         | 值                             |
+| ------------ | ------------------------------ |
+| 所属模块     | phy_engine                     |
+| 头文件       | `phy_engine/include/physics.h` |
+| 成员函数定义 | `phy_engine/physics.cpp` |
+| 类型         | 基类，模板类         |
+| 派生类       | `ball_t`, `line_wall_t`      |
+| 继承自       | 无                     |
+| 个性依赖     | `SHAPE_T`, `vector_t`        |
 
 表示物理引擎需要处理的物理对象.
 
@@ -246,19 +230,15 @@ end;
 
 ### physics_machine_t
 
-> 所属模块：phy_engine
->
-> 头文件：`phy_engine/include/physics.h`
->
-> 成员函数定义：`phy_engine/physics.cpp`
->
-> 类型：普通类
->
-> 派生类：无
->
-> 继承自：无
->
-> 个性依赖：`ball_t`, `line_wall_t`
+| 属性         | 值                             |
+| ------------ | ------------------------------ |
+| 所属模块     | phy_engine                     |
+| 头文件       | `phy_engine/include/physics.h` |
+| 成员函数定义 | `phy_engine/physics.cpp` |
+| 类型         | 普通类                     |
+| 派生类       | 无                             |
+| 继承自       | 无                     |
+| 个性依赖     | `ball_t`, `line_wall_t`      |
 
  物理引擎类，由线程调用的lambda函数实例化，并负责物理对象的运动模拟. lambda函数启动时接收一个二级指针，表示储存与逻辑线程共享的物体运动状态数据的内存地址，这个指针指向存储存储物理对象的容器的指针，并在实例化`physics_machine_t`时被传入构造函数.
 
@@ -268,19 +248,15 @@ end;
 
 ### vector_t
 
->所属模块：phy_engine
->
->头文件：`phy_engine/include/math.h`
->
->成员函数定义：`phy_engine/math.cpp`
->
->类型：普通类
->
->派生类：无
->
->继承自：无
->
->个性依赖：无
+| 属性         | 值                             |
+| ------------ | ------------------------------ |
+| 所属模块     | phy_engine                     |
+| 头文件       | `phy_engine/include/math.h` |
+| 成员函数定义 | `phy_engine/math.cpp`       |
+| 类型         | 普通类                     |
+| 派生类       | 无                             |
+| 继承自       | 无                     |
+| 个性依赖     | 无                             |
 
 向量类，实现了`+`、`-`、`*`的运算符重载，可直接进行向量之间的运算，`*`分别重载了数乘和向量内积.
 
