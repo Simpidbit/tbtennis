@@ -26,7 +26,7 @@ object_t<shape_data_t>::~object_t()
 
 
 ball_t::ball_t(double         mass,         SHAPE_T   shpae,
-               double shape_data,   vector_t  pos)
+               double         shape_data,   vector_t  pos)
     : object_t<double>::object_t(   mass,           shape,
                                     shape_data,     pos     )
 {
