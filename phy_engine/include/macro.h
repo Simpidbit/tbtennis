@@ -1,6 +1,8 @@
 #ifndef TBT_PHYSICS_MACRO_H
 #define TBT_PHYSICS_MACRO_H
 
+#define TEST
+
 #include <cstdint>
 
 #define SHAPE_T     uint8_t

@@ -56,8 +56,6 @@ class line_wall_t : object_t<std::vector<line_t>> {
     logic_thread_request_area: 当逻辑线程需要向物理引擎申请增加物体时，
         申请信息写入logic_thread_request_area，需要加锁.
 */
-std::mutex mtx;
-void * logic_thread_request_msg;
 class physics_machine_t {
     public:
         // 台球

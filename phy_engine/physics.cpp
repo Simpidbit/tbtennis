@@ -1,5 +1,9 @@
 #include "physics.h"
 
+#ifdef TEST
+#include <iostream>
+#endif
+
 ///////////////////////////////////////////////
 // object_t begin
 ///////////////////////////////////////////////
@@ -24,6 +28,8 @@ object_t<shape_data_t>::~object_t()
 ///////////////////////////////////////////////
 // object_t end, physics_machine_t begin
 ///////////////////////////////////////////////
+std::mutex mtx;
+void * logic_thread_request_msg;
 physics_machine_t::physics_machine_t(std::vector<ball_t> ** obj_container_pptr)
 {
     this->obj_container = new std::vector<ball_t>();
@@ -46,7 +52,11 @@ physics_machine_t::main_loop()
             byte_t * first_byte = static_cast<byte_t *>(::logic_thread_request_msg);
             if (first_byte->b1 & 0b1) {
                 // 有申请
-                ;
+#ifdef TEST
+                std::cout << "We received a request" << std::endl;
+                break;
+#else
+#endif
             }
         }
     }
