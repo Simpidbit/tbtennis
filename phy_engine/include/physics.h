@@ -32,13 +32,13 @@ class object_t {
     ball_t: 台球类
 */
 
-class ball_t : object_t<double> {
+class ball_t : public object_t<double> {
     public:
         COLOR_T         color;          // 球的颜色
 
     public:
         ball_t(double         mass,         SHAPE_T   shpae,
-               shape_data_t   shape_data,   vector_t  pos);
+               double         shape_data,   vector_t  pos);
 };
 
 

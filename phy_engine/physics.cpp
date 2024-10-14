@@ -26,7 +26,7 @@ object_t<shape_data_t>::~object_t()
 
 
 ball_t::ball_t(double         mass,         SHAPE_T   shpae,
-               shape_data_t   shape_data,   vector_t  pos) 
+               double shape_data,   vector_t  pos)
     : object_t<double>::object_t(   mass,           shape,
                                     shape_data,     pos     )
 {
@@ -63,7 +63,7 @@ physics_machine_t::main_loop()
 #ifdef TEST
                 std::cout << "We received a request" << std::endl;
                 std::cout << "Size of obj_container: " << this->obj_container->size() << std::endl;
-                for (auto iter = this->obj_container->begin(), iter != this->obj_container->end(); iter++) {
+                for (auto iter = this->obj_container->begin(); iter != this->obj_container->end(); iter++) {
                     std::cout << "mass: " << iter->mass << std::endl;
                 }
                 break;
