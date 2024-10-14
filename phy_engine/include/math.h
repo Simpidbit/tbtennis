@@ -13,7 +13,9 @@ class vector_t {
 
         vector_t operator+(vector_t &v);
         vector_t operator-(vector_t &v);
-        vector_t operator*(vector_t &v);
+        double operator*(vector_t &v);
+        vector_t operator*(double &n);
+        vector_t operator*(int &n);
         double modulus();
 };
 

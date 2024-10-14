@@ -9,7 +9,7 @@
 
 /*
     object_t: 物理对象类，基类，被具体物理对象类继承
-    类模板参数: 保存具体形状数据的数据结构
+    类模板参数: 保存具体形状数据的类
 */
 template <typename shape_data_t>
 class object_t {
@@ -18,8 +18,8 @@ class object_t {
         SHAPE_T         shape;          // 形状
         shape_data_t    shape_data;     // 由形状决定的具体形状数据
 
-        vector_t    pos;            // 坐标
-        vector_t    speed;          // 速度
+        vector_t    pos;                // 坐标
+        vector_t    speed;              // 速度
 
     public:
         object_t(double         mass,         SHAPE_T   shpae,
@@ -57,7 +57,7 @@ class line_wall_t : object_t<std::vector<line_t>> {
         申请信息写入logic_thread_request_area，需要加锁.
 */
 std::mutex mtx;
-void * logic_thread_request_area;
+void * logic_thread_request_msg;
 class physics_machine_t {
     public:
         // 台球

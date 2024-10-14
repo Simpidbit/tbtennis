@@ -36,15 +36,14 @@ physics_machine_t::~physics_machine_t()
 }
 
 
-
 void
 physics_machine_t::main_loop()
 {
     while (true) {
         // 检查逻辑线程是否有增添物体申请
-        {       // 这个块是为了在块结束时调用lock_guard的析构函数，及时解锁
+        {   // 这个块是为了在块结束时调用lock_guard的析构函数，及时解锁
             std::lock_guard<std::mutex> lock(mtx);
-            byte_t * first_byte = static_cast<byte_t *>(::logic_thread_request_area);
+            byte_t * first_byte = static_cast<byte_t *>(::logic_thread_request_msg);
             if (first_byte->b1 & 0b1) {
                 // 有申请
                 ;

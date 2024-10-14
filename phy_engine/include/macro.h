@@ -9,6 +9,7 @@
 #define LINE        (2)
 
 #define COLOR_T     uint8_t
+// TODO: 定义COLOR_T的具体取值
 
 typedef struct {
     char b1:1, b2:1, b3:1, b4:1,

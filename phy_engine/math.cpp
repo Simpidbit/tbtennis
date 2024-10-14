@@ -34,10 +34,24 @@ vector_t::operator-(vector_t &v)
     return nv;
 }
 
-vector_t
+double
 vector_t::operator*(vector_t &v)
 {
-    vector_t nv(this->x * v.x, this->y * v.y);
+    return this->x * v.x + this->y * v.y;
+}
+
+vector_t
+vector_t::operator*(double &n)
+{
+    vector_t nv(this->x * n, this->y * n);
+    return nv;
+}
+
+vector_t
+vector_t::operator*(int &n)
+{
+    vector_t nv( this->x * static_cast<double>(n), 
+                 this->y * static_cast<double>(n) );
     return nv;
 }
 
