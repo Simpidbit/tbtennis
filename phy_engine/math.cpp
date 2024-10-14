@@ -1,6 +1,10 @@
 #include "math.h"
 #include <cmath>
 
+
+/////////////////////////////////////////////////////
+// vector_t begin
+/////////////////////////////////////////////////////
 vector_t::vector_t()
 {
     this->x = 0.0;
@@ -41,3 +45,14 @@ double
 vector_t::modulus()
 { return sqrt(this->x * this->x + this->y * this->y); }
 
+/////////////////////////////////////////////////////
+// vector_t end, line_t begin
+/////////////////////////////////////////////////////
+
+line_t::line_t()
+{
+}
+
+line_t::~line_t()
+{
+}

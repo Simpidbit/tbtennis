@@ -17,4 +17,10 @@ class vector_t {
         double modulus();
 };
 
+class line_t {
+    public:
+        line_t();
+        ~line_t();
+};
+
 #endif
