@@ -45,9 +45,17 @@ int main(int, char **)
         phy_machine.main_loop();
     }, &obj_container_ptr);
 
-    std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 
-    byte->b1 = model->b2;
+    obj_container_ptr->push_back(ball_t(1.9, CIRCLE, 9.9, vector_t(1.0, 2.0)));
+    obj_container_ptr->push_back(ball_t(2.9, CIRCLE, 9.9, vector_t(1.0, 2.0)));
+    obj_container_ptr->push_back(ball_t(3.7, CIRCLE, 9.9, vector_t(1.0, 2.0)));
+
+    {
+        std::lock_guard<std::mutex> lk(::mtx);
+        byte->b1 = model->b2;
+    }
+
 
     phy_th.join();
     return 0;

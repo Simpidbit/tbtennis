@@ -51,9 +51,14 @@ physics_machine_t::main_loop()
             std::lock_guard<std::mutex> lock(mtx);
             byte_t * first_byte = static_cast<byte_t *>(::logic_thread_request_msg);
             if (first_byte->b1 & 0b1) {
+                first_byte->b1 = 0;
                 // 有申请
 #ifdef TEST
                 std::cout << "We received a request" << std::endl;
+                std::cout << "Size of obj_container: " << this->obj_container->size() << std::endl;
+                for (auto iter = this->obj_container->begin(), iter != this->obj_container->end(); iter++) {
+                    std::cout << "mass: " << iter->mass << std::endl;
+                }
                 break;
 #else
 #endif
