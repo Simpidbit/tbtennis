@@ -62,7 +62,7 @@
        </font>
       </property>
       <property name="text">
-       <string>历史分数</string>
+       <string>登录/注册</string>
       </property>
      </widget>
     </item>
@@ -81,7 +81,7 @@
        </font>
       </property>
       <property name="text">
-       <string>游戏说明</string>
+       <string>游戏设置</string>
       </property>
      </widget>
     </item>
