@@ -1,5 +1,7 @@
-#ifndef TBT_PHYSICS_MACRO_H
-#define TBT_PHYSICS_MACRO_H
+#ifndef GLOBAL_H
+#define GLOBAL_H
+
+
 
 #define TEST
 
@@ -15,7 +17,9 @@
 
 typedef struct {
     char b1:1, b2:1, b3:1, b4:1,
-         b5:1, b6:1, b7:1, b8:1;
+        b5:1, b6:1, b7:1, b8:1;
 } byte_t;
 
-#endif
+
+
+#endif // GLOBAL_H

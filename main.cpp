@@ -1,4 +1,4 @@
-#include "macro.h"
+#include "global.h"
 
 #ifndef TEST
 
@@ -29,7 +29,7 @@ extern std::mutex mtx;
 
 int main(int, char **)
 {
-    std::vector<ball_t> * obj_container_ptr = new std::vector<ball_t>();
+    std::vector<ball_t> * request_obj_container_ptr = new std::vector<ball_t>();
 
     char arr[10];
     arr[2] = 0b11111110;
@@ -40,20 +40,29 @@ int main(int, char **)
 
     byte->b1 = model->b1;
 
-    std::thread phy_th([=](std::vector<ball_t> ** obj_container_pptr) {
-        physics_machine_t phy_machine(obj_container_pptr);
+    std::thread phy_th([=](std::vector<ball_t> ** request_obj_container_pptr) {
+        physics_machine_t phy_machine(request_obj_container_pptr);
         phy_machine.main_loop();
-    }, &obj_container_ptr);
+    }, &request_obj_container_ptr);
 
     std::this_thread::sleep_for(std::chrono::milliseconds(3000));
 
-    obj_container_ptr->push_back(ball_t(1.9, CIRCLE, 9.9, vector_t(1.0, 2.0)));
-    obj_container_ptr->push_back(ball_t(2.9, CIRCLE, 9.9, vector_t(1.0, 2.0)));
-    obj_container_ptr->push_back(ball_t(3.7, CIRCLE, 9.9, vector_t(1.0, 2.0)));
+    request_obj_container_ptr->push_back(ball_t(1.9, CIRCLE, 9.9, vector_t(1.0, 2.0)));
+    request_obj_container_ptr->push_back(ball_t(2.9, CIRCLE, 9.9, vector_t(1.0, 2.0)));
+    request_obj_container_ptr->push_back(ball_t(3.7, CIRCLE, 9.9, vector_t(1.0, 2.0)));
 
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
     {
         std::lock_guard<std::mutex> lk(::mtx);
         byte->b1 = model->b2;
+        byte->b2 = model->b2;
+    }
+
+    std::this_thread::sleep_for(std::chrono::milliseconds(3000));
+    {
+        std::lock_guard<std::mutex> lk(::mtx);
+        byte->b1 = model->b2;
+        byte->b2 = 0;
     }
 
 

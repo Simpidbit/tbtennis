@@ -15,18 +15,24 @@ find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 add_subdirectory(phy_engine)
+add_subdirectory(logic)
+add_subdirectory(network)
 
 set(PROJECT_SOURCES
-        main.cpp
-        main_window_t.cpp
-        main_window_t.h
-        main_window_t.ui
+    main.cpp
+    main_window_t.cpp
+    main_window_t.h
+    main_window_t.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
     qt_add_executable(tbtennis
         MANUAL_FINALIZATION
         ${PROJECT_SOURCES}
+        game_window_t.cpp game_window_t.h game_window_t.ui
+        login_window_t.cpp login_window_t.h login_window_t.ui
+        setting_window_t.cpp setting_window_t.h setting_window_t.ui
+        global.h
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET tbtennis APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR
@@ -51,7 +57,7 @@ endif()
 #                               submodule here!                                          #
 #                                                                                        #
 ##########################################################################################
-target_link_libraries(tbtennis PRIVATE Qt${QT_VERSION_MAJOR}::Widgets phy_engine)
+target_link_libraries(tbtennis PRIVATE Qt${QT_VERSION_MAJOR}::Widgets phy_engine logic network)
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.
 # If you are developing for iOS or macOS you should consider setting an

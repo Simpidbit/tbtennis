@@ -1,7 +1,7 @@
 #ifndef TBT_PHYSICS_H
 #define TBT_PHYSICS_H
 
-#include "macro.h"
+#include "global.h"
 #include "phymath.h"
 
 #include <mutex>
@@ -74,11 +74,15 @@ class physics_machine_t {
         // 滚动摩擦因数
         double                          fric_coeff;
 
-        // 指向存储物理对象的容器
-        std::vector<ball_t> *           obj_container;
+        // 指向存储逻辑线程请求添加的物理对象的容器
+        std::vector<ball_t> *           request_obj_container;
+
+        // 物理引擎内部用的存储物理对象的容器
+        std::vector<ball_t>             obj_container;
 
     public:
-        physics_machine_t(std::vector<ball_t> ** obj_container_pptr);
+        physics_machine_t(
+            std::vector<ball_t> ** request_obj_container_pptr);
         ~physics_machine_t();
 
         // 主循环
