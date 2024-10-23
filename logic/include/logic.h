@@ -1,1 +1,3 @@
-class logic_machine_t
+class logic_machine_t {
+
+};

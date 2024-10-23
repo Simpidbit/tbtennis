@@ -61,19 +61,25 @@ physics_machine_t::main_loop()
                 if (first_byte->b2 & 0b1) {     // 添加元素
                     for (auto each : *(this->request_obj_container)) {
                         this->obj_container.push_back(each);
+
 #ifdef TEST
                         std::cout << "添加元素的质量: " << each.mass << std::endl;
                         std::cout << "当前obj_container大小: " << this->obj_container.size() << std::endl;
 #endif
                     }
                 }
+
+
 #ifdef TEST
                 else if (!(first_byte->b2 ^ 0b0)) {        // 测试时退出
                     std::cout << "收到命令退出" << std::endl;
                     break;
                 }
 #endif
+
             }
         }
+
+        // 物理量计算 更新
     }
 }

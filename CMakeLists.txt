@@ -33,6 +33,7 @@ if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
         login_window_t.cpp login_window_t.h login_window_t.ui
         setting_window_t.cpp setting_window_t.h setting_window_t.ui
         global.h
+        game_window_t.cpp
     )
 # Define target properties for Android with Qt 6 as:
 #    set_property(TARGET tbtennis APPEND PROPERTY QT_ANDROID_PACKAGE_SOURCE_DIR

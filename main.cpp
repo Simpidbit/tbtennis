@@ -7,11 +7,11 @@
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    main_window_t w;
-    w.show();
+    QApplication app(argc, argv);
+    main_window_t window;
+    window.show();
 
-    return a.exec();
+    return app.exec();
 }
 
 #else
