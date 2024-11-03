@@ -172,15 +172,15 @@ phy_engine 模块 由 logic 模块 支配
 
 ### ball_t
 
-| 属性         | 值                             |
-| ------------ | ------------------------------ |
-| 所属模块     | phy_engine                     |
-| 头文件       | `phy_engine/include/physics.h` |
-| 成员函数定义 | `phy_engine/physics.cpp`       |
-| 类型         | 最终派生类                     |
-| 派生类       | 无                             |
-| 继承自       | `object_t`                     |
-| 个性依赖     | 无                             |
+| 属性         | 值                            |
+| ------------ | ----------------------------- |
+| 所属模块     | phy_engine                    |
+| 头文件       | `phy_engine/include/object.h` |
+| 成员函数定义 | `phy_engine/object.cpp`       |
+| 类型         | 最终派生类                    |
+| 派生类       | 无                            |
+| 继承自       | `object_t`                    |
+| 个性依赖     | 无                            |
 
 表示台球.
 
@@ -225,8 +225,8 @@ phy_engine 模块 由 logic 模块 支配
 | 属性         | 值                             |
 | ------------ | ------------------------------ |
 | 所属模块     | phy_engine                     |
-| 头文件       | `phy_engine/include/physics.h` |
-| 成员函数定义 | `phy_engine/physics.cpp` |
+| 头文件       | `phy_engine/include/object.h` |
+| 成员函数定义 | `phy_engine/object.cpp` |
 | 类型         | 最终派生类                |
 | 派生类       | 无                             |
 | 继承自       | `object_t`          |
@@ -243,12 +243,12 @@ phy_engine 模块 由 logic 模块 支配
 | 属性         | 值                             |
 | ------------ | ------------------------------ |
 | 所属模块     | phy_engine                     |
-| 头文件       | `phy_engine/include/physics.h` |
-| 成员函数定义 | `phy_engine/physics.cpp` |
+| 头文件       | `phy_engine/include/object.h` |
+| 成员函数定义 | `phy_engine/object.cpp` |
 | 类型         | 基类，模板类         |
 | 派生类       | `ball_t`, `line_wall_t`      |
 | 继承自       | 无                     |
-| 个性依赖     | `SHAPE_T`, `vector_t`        |
+| 个性依赖     | `object_shape_e`, `vector_t` |
 
 表示物理引擎需要处理的物理对象.
 
