@@ -1,53 +1,11 @@
 #ifndef TBT_PHYSICS_H
 #define TBT_PHYSICS_H
 
-#include "global.h"
-#include "phymath.h"
 
-#include <mutex>
+#include "object.h"
+
 #include <vector>
-
-/*
-    object_t: 物理对象类，基类，被具体物理对象类继承
-    类模板参数: 保存具体形状数据的类
-*/
-template <typename shape_data_t>
-class object_t {
-    public:
-        double          mass;           // 质量
-        SHAPE_T         shape;          // 形状
-        shape_data_t    shape_data;     // 由形状决定的具体形状数据
-
-        vector_t    pos;                // 坐标
-        vector_t    speed;              // 速度
-
-    public:
-        object_t(double         mass,         SHAPE_T   shpae,
-                 shape_data_t   shape_data,   vector_t  pos);
-        ~object_t();
-};
-
-
-/*
-    ball_t: 台球类
-*/
-
-class ball_t : public object_t<double> {
-    public:
-        COLOR_T         color;          // 球的颜色
-
-    public:
-        ball_t(double         mass,         SHAPE_T   shpae,
-               double         shape_data,   vector_t  pos);
-};
-
-
-/*
-    line_wall_t: 直线型边界类，用于限制台球的运动区域
-                 可以是空心多边形，边由line_t对象描述
-*/
-class line_wall_t : object_t<std::vector<line_t>> {
-};
+#include <thread>
 
 
 /*
@@ -74,19 +32,24 @@ class physics_machine_t {
         // 滚动摩擦因数
         double                          fric_coeff;
 
-        // 指向存储逻辑线程请求添加的物理对象的容器
-        std::vector<ball_t> *           request_obj_container;
+        // 物理引擎线程内部计算线程和交互线程之间的互斥锁
+        std::mutex mtx_inner;
 
-        // 物理引擎内部用的存储物理对象的容器
-        std::vector<ball_t>             obj_container;
+        std::thread * calculate_thread;
+        std::thread * interact_thread;
+
 
     public:
-        physics_machine_t(
-            std::vector<ball_t> ** request_obj_container_pptr);
+        physics_machine_t();
         ~physics_machine_t();
 
-        // 主循环
-        void main_loop();
+        // 计算循环线程
+        static void calculate_loop(physics_machine_t * parent);
+
+        // 交互循环线程
+        static void interact_loop(physics_machine_t * parent);
+
+        void start_loops();
 };
 
 

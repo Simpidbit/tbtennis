@@ -1,14 +1,22 @@
 #include "global.h"
+#include "logic.h"
 
 #ifndef TEST
 
 #include "main_window_t.h"
 #include <QApplication>
 
+
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
     main_window_t window;
+
+    // 启动逻辑线程
+    logic_t logic;
+    logic.start();
+
+    // 显示菜单窗口
     window.show();
 
     return app.exec();
@@ -22,9 +30,6 @@ int main(int argc, char *argv[])
 #include <thread>
 #include <cstdlib>
 #include <chrono>
-
-extern void * logic_thread_request_msg;
-extern std::mutex mtx;
 
 
 int main(int, char **)

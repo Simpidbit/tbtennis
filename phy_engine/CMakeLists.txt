@@ -10,7 +10,11 @@ set(PHY_SOURCES
     physics.cpp
 )
 
-add_library(phy_engine ${PHY_SOURCES})
+add_library(phy_engine ${PHY_SOURCES}
+    include/phymath.h
+    include/physics.h
+    include/object.h
+    object.cpp)
 
 target_include_directories(phy_engine PUBLIC ${CMAKE_CURRENT_SOURCE_DIR}/include ${CMAKE_CURRENT_SOURCE_DIR}/../)
 

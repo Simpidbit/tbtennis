@@ -2,6 +2,8 @@
 #define GAME_WINDOW_T_H
 
 #include <QWidget>
+#include <QTimer>
+#include <QPainter>
 
 namespace Ui {
 class game_window_t;
@@ -17,6 +19,11 @@ public:
 
 private:
     Ui::game_window_t *ui;
+    void paintEvent(QPaintEvent * event);
+    void timerHandler();
+
+    QTimer timer;
+
 };
 
 #endif // GAME_WINDOW_T_H

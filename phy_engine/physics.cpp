@@ -1,85 +1,96 @@
 #include "physics.h"
 
+#include "global.h"
+#include "message.h"
+
+#include <mutex>
+#include <condition_variable>
+#include <thread>
+
+// 物理引擎线程和逻辑线程间的互斥锁
+std::mutex mtx_phy_engine_interact;
+
+// 是否有新消息
+std::condition_variable cv_phy_engine;
+
+// 逻辑线程向物理引擎线程申请添加/删除元素的接口
+std::queue<message_t> logic_thread_request_msg;
+
+
 #ifdef TEST
 #include <iostream>
 #endif
 
-///////////////////////////////////////////////
-// object_t begin
-///////////////////////////////////////////////
-
-template <typename shape_data_t>
-object_t<shape_data_t>::object_t(double         mass,           SHAPE_T        shpae, 
-                                 shape_data_t   shape_data,     vector_t       pos)
-: mass(mass),               shape(shape),
-  shape_data(shape_data),   pos(pos)
+physics_machine_t::physics_machine_t()
 {
-}
-
-
-template <typename shape_data_t>
-object_t<shape_data_t>::~object_t()
-{
-}
-
-
-ball_t::ball_t(double         mass,         SHAPE_T   shpae,
-               double         shape_data,   vector_t  pos)
-    : object_t<double>::object_t(   mass,           shape,
-                                    shape_data,     pos     )
-{
-}
-
-///////////////////////////////////////////////
-// object_t end, physics_machine_t begin
-///////////////////////////////////////////////
-std::mutex mtx;
-void * logic_thread_request_msg;
-physics_machine_t::physics_machine_t(std::vector<ball_t> ** request_obj_container_pptr)
-{
-    this->request_obj_container = new std::vector<ball_t>();
-    *request_obj_container_pptr = this->request_obj_container;
 }
 
 physics_machine_t::~physics_machine_t()
 {
-    delete this->request_obj_container;
+    this->interact_thread->join();
+    this->calculate_thread->join();
+
+    delete this->interact_thread;
+    delete this->calculate_thread;
+
+    this->interact_thread = nullptr;
+    this->calculate_thread = nullptr;
 }
 
 
 void
-physics_machine_t::main_loop()
+physics_machine_t::interact_loop(physics_machine_t * parent)
 {
     while (true) {
         // 检查逻辑线程是否有增添物体申请
         {   // 这个块是为了在块结束时调用lock_guard的析构函数，及时解锁
-            std::lock_guard<std::mutex> lock(mtx);
-            byte_t * first_byte = static_cast<byte_t *>(::logic_thread_request_msg);
-            if (first_byte->b1 & 0b1) {
-                first_byte->b1 = 0;
-                // 有申请
-                if (first_byte->b2 & 0b1) {     // 添加元素
-                    for (auto each : *(this->request_obj_container)) {
-                        this->obj_container.push_back(each);
+            std::unique_lock<std::mutex> interact_lock(::mtx_phy_engine_interact);
+            ::cv_phy_engine.wait(interact_lock);
 
-#ifdef TEST
-                        std::cout << "添加元素的质量: " << each.mass << std::endl;
-                        std::cout << "当前obj_container大小: " << this->obj_container.size() << std::endl;
-#endif
+            // condition_variable wait()函数会自动将lock解锁
+            // 重新加锁
+            interact_lock.lock();
+
+            if (!::logic_thread_request_msg.empty()) {      // 有消息
+                auto msg = ::logic_thread_request_msg.front();
+                {   // 内部锁上锁
+                    std::unique_lock<std::mutex> inner_lock(parent->mtx_inner);
+                    switch (msg.msgtype) {
+                    case MSG_OBJ_ADD: {         // 添加新物体
+                        // 解析物体类型
+                        object_pointer_t * objptr = static_cast<object_pointer_t *>(msg.attach);
+                        switch (objptr->shape) {
+                        case BALL: {        // 球
+                            ball_t * ballptr = static_cast<ball_t *>(objptr->objdata);
+                            parent->balls.push_back(*ballptr);
+                        }
+                        break;
+                        case LINE_WALL: {   // 墙
+                            // TODO...
+                        }
+                        break;
+                        }
+                    }
+                    break;
                     }
                 }
-
-
-#ifdef TEST
-                else if (!(first_byte->b2 ^ 0b0)) {        // 测试时退出
-                    std::cout << "收到命令退出" << std::endl;
-                    break;
-                }
-#endif
-
             }
+            ::logic_thread_request_msg.pop();
         }
-
-        // 物理量计算 更新
     }
+}
+
+void
+physics_machine_t::calculate_loop(physics_machine_t * parent)
+{
+    { std::unique_lock<std::mutex> inner_lock(parent->mtx_inner);
+
+    }
+}
+
+void
+physics_machine_t::start_loops()
+{
+    this->calculate_thread = new std::thread(physics_machine_t::calculate_loop, this);
+    this->interact_thread = new std::thread(physics_machine_t::interact_loop, this);
 }
